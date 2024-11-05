@@ -1,0 +1,10 @@
+﻿@model Juego
+@{
+    ViewData["Title"] = "Resultado del Juego";
+}
+
+<h2>@ViewBag.Mensaje</h2>
+
+<p>Gracias por jugar.</p>
+<a asp-action="Index" asp-controller="Juego" class="btn btn-primary">Jugar de Nuevo</a>
+

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProyectoAhorcado.Models.Intento>
+﻿@model IEnumerable<ProyectoAhorcado.Models.Juego>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Letra)
+                @Html.DisplayNameFor(model => model.PalabraOculta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Correcto)
+                @Html.DisplayNameFor(model => model.IntentosRestantes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Juego)
+                @Html.DisplayNameFor(model => model.Palabra)
             </th>
             <th></th>
         </tr>
@@ -28,13 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Letra)
+                @Html.DisplayFor(modelItem => item.PalabraOculta)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Correcto)
+                @Html.DisplayFor(modelItem => item.IntentosRestantes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Juego.Id)
+                @Html.DisplayFor(modelItem => item.Palabra.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

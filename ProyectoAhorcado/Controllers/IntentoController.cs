@@ -22,7 +22,8 @@ namespace ProyectoAhorcado.Controllers
         // GET: Intentoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Intento.ToListAsync());
+            var proyectoAhorcadoContext = _context.Intento.Include(i => i.Juego);
+            return View(await proyectoAhorcadoContext.ToListAsync());
         }
 
         // GET: Intentoes/Details/5
@@ -34,6 +35,7 @@ namespace ProyectoAhorcado.Controllers
             }
 
             var intento = await _context.Intento
+                .Include(i => i.Juego)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (intento == null)
             {
@@ -46,6 +48,7 @@ namespace ProyectoAhorcado.Controllers
         // GET: Intentoes/Create
         public IActionResult Create()
         {
+            ViewData["JuegoId"] = new SelectList(_context.Juego, "Id", "Id");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace ProyectoAhorcado.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Letra,Correcto")] Intento intento)
+        public async Task<IActionResult> Create([Bind("Id,Letra,Correcto,JuegoId")] Intento intento)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace ProyectoAhorcado.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["JuegoId"] = new SelectList(_context.Juego, "Id", "Id", intento.JuegoId);
             return View(intento);
         }
 
@@ -78,6 +82,7 @@ namespace ProyectoAhorcado.Controllers
             {
                 return NotFound();
             }
+            ViewData["JuegoId"] = new SelectList(_context.Juego, "Id", "Id", intento.JuegoId);
             return View(intento);
         }
 
@@ -86,7 +91,7 @@ namespace ProyectoAhorcado.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Letra,Correcto")] Intento intento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Letra,Correcto,JuegoId")] Intento intento)
         {
             if (id != intento.Id)
             {
@@ -113,6 +118,7 @@ namespace ProyectoAhorcado.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["JuegoId"] = new SelectList(_context.Juego, "Id", "Id", intento.JuegoId);
             return View(intento);
         }
 
@@ -125,6 +131,7 @@ namespace ProyectoAhorcado.Controllers
             }
 
             var intento = await _context.Intento
+                .Include(i => i.Juego)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (intento == null)
             {
