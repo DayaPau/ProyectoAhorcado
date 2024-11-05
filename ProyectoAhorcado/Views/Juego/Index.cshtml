@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Inicio del Juego";
+}
+
+<h2>Bienvenido al Juego del Ahorcado</h2>
+
+<p>¡Haz clic en el botón para iniciar una nueva partida!</p>
+
+<form asp-action="Index" asp-controller="Juego" method="post">
+    <button type="submit" class="btn btn-primary">Iniciar Nueva Partida</button>
+</form>

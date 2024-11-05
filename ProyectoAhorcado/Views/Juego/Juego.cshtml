@@ -1,0 +1,53 @@
+﻿@model ProyectoAhorcado.Models.Juego
+
+@{
+    ViewData["Title"] = "Juego del Ahorcado";
+}
+
+<h2>Juego del Ahorcado</h2>
+
+<p><strong>Palabra:</strong> 
+@{
+    foreach (var letra in Model.PalabraOculta)
+    {
+        if (Model.Intentos.Any(i => i.Letra == letra))
+        {
+            @letra
+        }
+        else
+        {
+            @Html.Raw("_ ")
+        }
+    }
+}
+</p>
+
+<p><strong>Intentos restantes:</strong> @Model.IntentosRestantes</p>
+
+@if (Model.IntentosRestantes <= 0)
+{
+    <p><strong>Perdiste</strong>. La palabra era: @Model.PalabraOculta</p>
+    <a asp-action="Index" asp-controller="Juego" class="btn btn-primary">Jugar de Nuevo</a>
+}
+else if (Model.PalabraOculta.All(letra => Model.Intentos.Any(i => i.Letra == letra)))
+{
+    <p><strong>¡Ganaste!</strong> Has adivinado la palabra.</p>
+    <a asp-action="Index" asp-controller="Juego" class="btn btn-primary">Jugar de Nuevo</a>
+}
+else
+{
+    <form asp-action="Intentar" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <label for="letra">Ingresa una letra:</label>
+        <input type="text" id="letra" name="letra" maxlength="1" required />
+        <button type="submit" class="btn btn-success">Intentar</button>
+    </form>
+}
+
+<h3>Letras Intentadas:</h3>
+<ul>
+    @foreach (var intento in Model.Intentos)
+    {
+        <li>@intento.Letra - @(intento.Correcto ? "Correcto" : "Incorrecto")</li>
+    }
+</ul>

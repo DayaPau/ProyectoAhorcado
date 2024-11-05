@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Bienvenido al Juego del Ahorcado";
+}
+
+<div class="text-center">
+    <h1>Bienvenido al Juego del Ahorcado</h1>
+    <p>¡Pon a prueba tu habilidad para adivinar palabras antes de que se agoten tus intentos!</p>
+
+    <h3>¿Cómo jugar?</h3>
+    <p>
+        En cada partida, tendrás una palabra secreta que debes adivinar letra por letra.
+        Pero cuidado, ¡solo tienes 6 intentos para adivinarla correctamente!
+    </p>
+
+    <a asp-controller="Juego" asp-action="Index" class="btn btn-primary">Iniciar una Nueva Partida</a>
+</div>
+
+<div class="container mt-4">
+    <h3>Reglas del Juego</h3>
+    <ul>
+        <li>Elige una letra y verifica si está en la palabra oculta.</li>
+        <li>Cada letra incorrecta reducirá tus intentos restantes.</li>
+        <li>Ganas si logras adivinar todas las letras de la palabra antes de que se agoten los intentos.</li>
+        <li>¡Pierdes si te quedas sin intentos!</li>
+    </ul>
+</div>
