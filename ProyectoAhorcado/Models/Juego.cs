@@ -11,10 +11,8 @@
         public List<Intento> Intentos { get; set; } = new List<Intento>();
         public int IntentosRestantes { get; set; }
 
-        [Key]
         public int PalabraId { get; set; }
 
-        [ForeignKey("Palabra")]
         public Palabra Palabra { get; set; } // Navegación a la Palabra
     }
 
